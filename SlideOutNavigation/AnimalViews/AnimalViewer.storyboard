@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Animal Viewer View controller-->
+        <scene sceneID="8Gm-3A-dcH">
+            <objects>
+                <viewController storyboardIdentifier="AnimalVieweViewController" title="Center View Controller" id="dWi-gf-kuM" userLabel="Animal Viewer View controller" customClass="AnimalViewerViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fb8-G4-Pbh"/>
+                        <viewControllerLayoutGuide type="bottom" id="AWk-t2-ZnU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5fU-E4-Fz3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Jumping School" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-4c-4ZA">
+                                <rect key="frame" x="127" y="392" width="121" height="20"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ID-10029135.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="eyo-3h-X04">
+                                <rect key="frame" x="0.0" y="64" width="375" height="16"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="lessThanOrEqual" constant="350" id="eUX-WH-jqJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Images courtesy of FreeDigitalPhotos.net" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QzD-gY-BY4">
+                                <rect key="frame" x="81" y="478" width="213" height="14"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Vlado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zb5-mR-JNb">
+                                <rect key="frame" x="169" y="420" width="37" height="17"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6NR-4c-4ZA" firstAttribute="top" secondItem="eyo-3h-X04" secondAttribute="bottom" constant="19" id="2iC-NS-DG5"/>
+                            <constraint firstItem="AWk-t2-ZnU" firstAttribute="top" secondItem="QzD-gY-BY4" secondAttribute="bottom" constant="10" id="885-Um-0qb"/>
+                            <constraint firstAttribute="trailing" secondItem="eyo-3h-X04" secondAttribute="trailing" id="BUB-0o-v7U"/>
+                            <constraint firstAttribute="centerX" secondItem="6NR-4c-4ZA" secondAttribute="centerX" id="C1D-gE-xVz"/>
+                            <constraint firstItem="eyo-3h-X04" firstAttribute="leading" secondItem="5fU-E4-Fz3" secondAttribute="leading" id="LV5-eu-O3O"/>
+                            <constraint firstItem="zb5-mR-JNb" firstAttribute="top" secondItem="6NR-4c-4ZA" secondAttribute="bottom" constant="8" id="YjB-9H-l02"/>
+                            <constraint firstItem="eyo-3h-X04" firstAttribute="top" secondItem="fb8-G4-Pbh" secondAttribute="bottom" id="Ysz-MN-In2"/>
+                            <constraint firstAttribute="centerX" secondItem="zb5-mR-JNb" secondAttribute="centerX" id="p3G-ak-UeB"/>
+                            <constraint firstAttribute="centerX" secondItem="QzD-gY-BY4" secondAttribute="centerX" id="pch-s6-Ub1"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="0Zw-fu-mzJ"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Slide Out Tutorial" id="9tt-ih-xBD">
+                        <barButtonItem key="leftBarButtonItem" title="Kitties" id="LNh-yR-DaU">
+                            <connections>
+                                <action selector="kittiesTapped:" destination="dWi-gf-kuM" id="4WU-ad-YMC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="creatorLabel" destination="zb5-mR-JNb" id="ryA-28-LFe"/>
+                        <outlet property="imageView" destination="eyo-3h-X04" id="zq9-QF-flu"/>
+                        <outlet property="titleLabel" destination="6NR-4c-4ZA" id="IfV-B5-XZE"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UHV-Xq-Kcg" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="305" y="382"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ID-10029135.jpg" width="16" height="16"/>
+    </resources>
+</document>
