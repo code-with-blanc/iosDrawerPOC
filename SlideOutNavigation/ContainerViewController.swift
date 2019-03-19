@@ -119,7 +119,7 @@ extension ContainerViewController: CenterViewControllerDelegate {
   
   func addChildSidePanelController(_ sidePanelController: SidePanelViewController) {
     sidePanelController.delegate = centerViewController
-    view.addSubview(sidePanelController.view)
+    view.insertSubview(sidePanelController.view, at: 0)
     
     addChildViewController(sidePanelController)
     sidePanelController.didMove(toParentViewController: self)
@@ -140,9 +140,9 @@ extension ContainerViewController: CenterViewControllerDelegate {
     
     if shouldExpand {
       currentState = .leftPanelExpanded
-      if let leftVC = leftViewController {
-        leftVC.view.frame.origin.x = -leftVC.view.frame.width
-      }
+//      if let leftVC = leftViewController {
+//        leftVC.view.frame.origin.x = -leftVC.view.frame.width
+//      }
       animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
     } else {
       
@@ -163,8 +163,8 @@ extension ContainerViewController: CenterViewControllerDelegate {
                    animations: {
                       let leftVC = self.leftViewController
                       let leftWidth = leftVC?.view.bounds.width ?? 0
-                      leftVC?.view.frame.origin.x = targetPosition - leftWidth
-//                      self.centerNavigationController.view.frame.origin.x = targetPosition
+//                      leftVC?.view.frame.origin.x = targetPosition - leftWidth
+                      self.centerNavigationController.view.frame.origin.x = targetPosition
                    },
                    completion: completion)
   }
@@ -249,7 +249,7 @@ private extension UIStoryboard {
   }
   
   static func rightViewController() -> SidePanelViewController? {
-    return main().instantiateViewController(withIdentifier: "RightViewController") as? SidePanelViewController
+    return nil
   }
   
   static func centerViewController() -> CenterViewController? {
