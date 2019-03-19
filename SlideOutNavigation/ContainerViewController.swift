@@ -64,7 +64,6 @@ class ContainerViewController: UIViewController {
 // MARK: CenterViewController delegate
 extension ContainerViewController: CenterViewControllerDelegate {
   func toggleSidePanel() {
-    
     let notAlreadyExpanded = (currentState != .expanded)
     
     if notAlreadyExpanded {
@@ -81,22 +80,19 @@ extension ContainerViewController: CenterViewControllerDelegate {
   }
   
   func addSidePanelViewController() {
-    
     guard sidePanelController == nil else { return }
     
     if let vc = UIStoryboard.sidePanelViewController() {
       vc.animals = Animal.allCats()
-      addChildSidePanelController(vc)
+      
+      vc.delegate = centerViewController
+      view.insertSubview(vc.view, at: 0)
+      
+      addChildViewController(vc)
+      vc.didMove(toParentViewController: self)
+      
       sidePanelController = vc
     }
-  }
-  
-  func addChildSidePanelController(_ sidePanelController: SidePanelViewController) {
-    sidePanelController.delegate = centerViewController
-    view.insertSubview(sidePanelController.view, at: 0)
-    
-    addChildViewController(sidePanelController)
-    sidePanelController.didMove(toParentViewController: self)
   }
   
   func animateSidePanel(shouldExpand: Bool) {
@@ -133,7 +129,6 @@ extension ContainerViewController: CenterViewControllerDelegate {
 }
 
 // MARK: Gesture recognizer
-
 extension ContainerViewController: UIGestureRecognizerDelegate {
   
   @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
@@ -143,10 +138,9 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     switch recognizer.state {
       
     case .began:
-      if currentState == .collapsed {
-        if gestureIsDraggingFromLeftToRight {
+      let prepareToExpand = (currentState == .collapsed) && gestureIsDraggingFromLeftToRight
+      if prepareToExpand {
           addSidePanelViewController()
-        }
       }
       
     case .changed:
@@ -162,7 +156,6 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
         // animate the side panel open or closed based on whether the view has moved more or less than halfway
         let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
         animateSidePanel(shouldExpand: hasMovedGreaterThanHalfway)
-        
       }
       
     default:

@@ -40,10 +40,6 @@ class CenterViewController: UIViewController {
   @IBAction func kittiesTapped(_ sender: Any) {
     delegate?.toggleSidePanel?()
   }
-  
-  @IBAction func puppiesTapped(_ sender: Any) {
-    print("No right panel anymore...")
-  }
 }
 
 // MARK: - SidePanelViewControllerDelegate
