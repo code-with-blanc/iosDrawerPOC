@@ -29,27 +29,14 @@
 import UIKit
 
 class CenterViewController: UIViewController {
-  
-  @IBOutlet weak private var imageView: UIImageView!
-  @IBOutlet weak private var titleLabel: UILabel!
-  @IBOutlet weak private var creatorLabel: UILabel!
-  
-  var delegate: CenterViewControllerDelegate?
+  var delegate: ContainerViewControllerDelegate?
   
   // MARK: Button actions
-  @IBAction func kittiesTapped(_ sender: Any) {
-    delegate?.toggleSidePanel?()
+  @IBAction func openTapped(_ sender: Any) {
+    delegate?.expandSidePanel()
   }
-}
-
-// MARK: - SidePanelViewControllerDelegate
-extension CenterViewController: SidePanelViewControllerDelegate {
   
-  func didSelectAnimal(_ animal: Animal) {
-    imageView.image = animal.image
-    titleLabel.text = animal.title
-    creatorLabel.text = animal.creator
-    
-    delegate?.collapseSidePanel?()
+  @IBAction func closeTapped(_ sender: Any) {
+    delegate?.collapseSidePanel()
   }
 }

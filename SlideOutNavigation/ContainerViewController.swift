@@ -52,6 +52,7 @@ class ContainerViewController: UIViewController {
     centerViewController.delegate = self
     
     centerNavigationController = UINavigationController(rootViewController: centerViewController)
+    centerViewController.navigationController?.isNavigationBarHidden = true
     view.addSubview(centerNavigationController.view)
     addChildViewController(centerNavigationController)
     
@@ -63,7 +64,7 @@ class ContainerViewController: UIViewController {
 }
 
 // MARK: CenterViewController delegate
-extension ContainerViewController: CenterViewControllerDelegate {
+extension ContainerViewController: ContainerViewControllerDelegate {
   func toggleSidePanel() {
     let notAlreadyExpanded = (currentState != .expanded)
     
@@ -74,19 +75,19 @@ extension ContainerViewController: CenterViewControllerDelegate {
     animateSidePanel(shouldExpand: notAlreadyExpanded)
   }
   
+  func expandSidePanel() {
+    if(currentState == .collapsed)  { toggleSidePanel() }
+  }
+  
   func collapseSidePanel() {
-    if(currentState == .expanded) {
-      toggleSidePanel()
-    }
+    if(currentState == .expanded)  { toggleSidePanel() }
   }
   
   func addSidePanelViewController() {
     guard sidePanelController == nil else { return }
     
     if let vc = UIStoryboard.sidePanelViewController() {
-      vc.animals = Animal.allCats()
-      
-      vc.delegate = centerViewController
+      vc.delegate = self
       view.addSubview(vc.view)
       
       addChildViewController(vc)

@@ -24,6 +24,7 @@
 		C602E60B22414C140009897B /* AnimalSelector.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C602E60A22414C140009897B /* AnimalSelector.storyboard */; };
 		C602E60D22414D4A0009897B /* AnimalViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602E60C22414D4A0009897B /* AnimalViewerViewController.swift */; };
 		C602E60F22414D670009897B /* AnimalSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602E60E22414D670009897B /* AnimalSelectorViewController.swift */; };
+		C68AEAC62241576A0083583E /* ContainerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		C602E60A22414C140009897B /* AnimalSelector.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AnimalSelector.storyboard; sourceTree = "<group>"; };
 		C602E60C22414D4A0009897B /* AnimalViewerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalViewerViewController.swift; sourceTree = "<group>"; };
 		C602E60E22414D670009897B /* AnimalSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalSelectorViewController.swift; sourceTree = "<group>"; };
+		C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,9 +95,10 @@
 				C602E61022414D770009897B /* AnimalViews */,
 				17BDB3511998A8860064476C /* Assets */,
 				17C4DFCF198E428000E0B395 /* AppDelegate.swift */,
+				178B5A5C198E7379006414ED /* ContainerViewController.swift */,
+				C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */,
 				17C4E01E198E477C00E0B395 /* CenterViewController.swift */,
 				5F3DBC4D1FA185D30077EA89 /* CenterViewControllerDelegate.swift */,
-				178B5A5C198E7379006414ED /* ContainerViewController.swift */,
 				17C4E022198E504400E0B395 /* SidePanelViewController.swift */,
 				5F3DBC3D1FA1684C0077EA89 /* SidePanelViewControllerDelegate.swift */,
 				17C4DFD3198E428000E0B395 /* Main.storyboard */,
@@ -209,6 +212,7 @@
 				5F3DBC3C1FA167F10077EA89 /* AnimalCell.swift in Sources */,
 				17C4E01B198E444000E0B395 /* Animal.swift in Sources */,
 				178B5A5D198E7379006414ED /* ContainerViewController.swift in Sources */,
+				C68AEAC62241576A0083583E /* ContainerViewControllerDelegate.swift in Sources */,
 				5F3DBC3E1FA1684C0077EA89 /* SidePanelViewControllerDelegate.swift in Sources */,
 				17C4E023198E504400E0B395 /* SidePanelViewController.swift in Sources */,
 				17C4E01F198E477C00E0B395 /* CenterViewController.swift in Sources */,
