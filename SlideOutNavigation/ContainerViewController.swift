@@ -86,7 +86,7 @@ extension ContainerViewController: CenterViewControllerDelegate {
       vc.animals = Animal.allCats()
       
       vc.delegate = centerViewController
-      view.insertSubview(vc.view, at: 0)
+      view.addSubview(vc.view)
       
       addChildViewController(vc)
       vc.didMove(toParentViewController: self)
@@ -99,10 +99,13 @@ extension ContainerViewController: CenterViewControllerDelegate {
     
     if shouldExpand {
       currentState = .expanded
-//      if let leftVC = leftViewController {
-//        leftVC.view.frame.origin.x = -leftVC.view.frame.width
-//      }
-      animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+      if let view = sidePanelController?.view {
+        let width = view.frame.width
+        view.frame.origin.x = -width
+        animateSidePanelXPosition(targetPosition: -0.0*width)
+      }
+      
+//      animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
     } else {
       
       animateCenterPanelXPosition(targetPosition: 0) { _ in
@@ -119,10 +122,20 @@ extension ContainerViewController: CenterViewControllerDelegate {
                    initialSpringVelocity: 0,
                    options: .curveEaseInOut,
                    animations: {
-//                      let leftVC = self.leftViewController
-//                      let leftWidth = leftVC?.view.bounds.width ?? 0
-//                      leftVC?.view.frame.origin.x = targetPosition - leftWidth
                       self.centerNavigationController.view.frame.origin.x = targetPosition
+                   },
+                   completion: completion)
+  }
+  
+  func animateSidePanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
+    UIView.animate(withDuration: 1.0, delay: 0,
+                   usingSpringWithDamping: 0.8,
+                   initialSpringVelocity: 0,
+                   options: .curveEaseInOut,
+                   animations: {
+                    if let vc = self.sidePanelController {
+                      vc.view.frame.origin.x = targetPosition
+                    }
                    },
                    completion: completion)
   }
