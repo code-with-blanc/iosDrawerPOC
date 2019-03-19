@@ -32,15 +32,15 @@ import QuartzCore
 class ContainerViewController: UIViewController {
   
   enum SlideOutState {
-    case bothCollapsed
-    case leftPanelExpanded
+    case collapsed
+    case expanded
   }
   
   var centerNavigationController: UINavigationController!
   var centerViewController: CenterViewController!
   
-  var currentState: SlideOutState = .bothCollapsed
-  var leftViewController: SidePanelViewController?
+  var currentState: SlideOutState = .collapsed
+  var sidePanelController: SidePanelViewController?
   
   let centerPanelExpandedOffset: CGFloat = 60
   
@@ -63,36 +63,31 @@ class ContainerViewController: UIViewController {
 
 // MARK: CenterViewController delegate
 extension ContainerViewController: CenterViewControllerDelegate {
-  
-  func toggleLeftPanel() {
+  func toggleSidePanel() {
     
-    let notAlreadyExpanded = (currentState != .leftPanelExpanded)
+    let notAlreadyExpanded = (currentState != .expanded)
     
     if notAlreadyExpanded {
-      addLeftPanelViewController()
+      addSidePanelViewController()
     }
     
-    animateLeftPanel(shouldExpand: notAlreadyExpanded)
+    animateSidePanel(shouldExpand: notAlreadyExpanded)
   }
   
-  func collapseSidePanels() {
-    
-    switch currentState {
-    case .leftPanelExpanded:
-      toggleLeftPanel()
-    default:
-      break
+  func collapseSidePanel() {
+    if(currentState == .expanded) {
+      toggleSidePanel()
     }
   }
   
-  func addLeftPanelViewController() {
+  func addSidePanelViewController() {
     
-    guard leftViewController == nil else { return }
+    guard sidePanelController == nil else { return }
     
-    if let vc = UIStoryboard.leftViewController() {
+    if let vc = UIStoryboard.sidePanelViewController() {
       vc.animals = Animal.allCats()
       addChildSidePanelController(vc)
-      leftViewController = vc
+      sidePanelController = vc
     }
   }
   
@@ -104,10 +99,10 @@ extension ContainerViewController: CenterViewControllerDelegate {
     sidePanelController.didMove(toParentViewController: self)
   }
   
-  func animateLeftPanel(shouldExpand: Bool) {
+  func animateSidePanel(shouldExpand: Bool) {
     
     if shouldExpand {
-      currentState = .leftPanelExpanded
+      currentState = .expanded
 //      if let leftVC = leftViewController {
 //        leftVC.view.frame.origin.x = -leftVC.view.frame.width
 //      }
@@ -115,15 +110,14 @@ extension ContainerViewController: CenterViewControllerDelegate {
     } else {
       
       animateCenterPanelXPosition(targetPosition: 0) { _ in
-        self.currentState = .bothCollapsed
-        self.leftViewController?.view.removeFromSuperview()
-        self.leftViewController = nil
+        self.currentState = .collapsed
+        self.sidePanelController?.view.removeFromSuperview()
+        self.sidePanelController = nil
       }
     }
   }
   
   func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
-    
     UIView.animate(withDuration: 1.0, delay: 0,
                    usingSpringWithDamping: 0.8,
                    initialSpringVelocity: 0,
@@ -149,9 +143,9 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     switch recognizer.state {
       
     case .began:
-      if currentState == .bothCollapsed {
+      if currentState == .collapsed {
         if gestureIsDraggingFromLeftToRight {
-          addLeftPanelViewController()
+          addSidePanelViewController()
         }
       }
       
@@ -163,11 +157,11 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       }
       
     case .ended:
-      if let _ = leftViewController,
+      if let _ = sidePanelController,
         let rview = recognizer.view {
         // animate the side panel open or closed based on whether the view has moved more or less than halfway
         let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
-        animateLeftPanel(shouldExpand: hasMovedGreaterThanHalfway)
+        animateSidePanel(shouldExpand: hasMovedGreaterThanHalfway)
         
       }
       
@@ -181,8 +175,8 @@ private extension UIStoryboard {
   
   static func main() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
   
-  static func leftViewController() -> SidePanelViewController? {
-    return main().instantiateViewController(withIdentifier: "LeftViewController") as? SidePanelViewController
+  static func sidePanelViewController() -> SidePanelViewController? {
+    return main().instantiateViewController(withIdentifier: "SidePanelViewController") as? SidePanelViewController
   }
   
   static func centerViewController() -> CenterViewController? {

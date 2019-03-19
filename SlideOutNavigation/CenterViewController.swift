@@ -38,7 +38,7 @@ class CenterViewController: UIViewController {
   
   // MARK: Button actions
   @IBAction func kittiesTapped(_ sender: Any) {
-    delegate?.toggleLeftPanel?()
+    delegate?.toggleSidePanel?()
   }
   
   @IBAction func puppiesTapped(_ sender: Any) {
@@ -54,6 +54,6 @@ extension CenterViewController: SidePanelViewControllerDelegate {
     titleLabel.text = animal.title
     creatorLabel.text = animal.creator
     
-    delegate?.collapseSidePanels?()
+    delegate?.collapseSidePanel?()
   }
 }

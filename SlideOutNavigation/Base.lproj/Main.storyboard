@@ -82,10 +82,10 @@
             </objects>
             <point key="canvasLocation" x="305" y="382"/>
         </scene>
-        <!--Left View Controller-->
+        <!--Side Panel View Controller-->
         <scene sceneID="1ll-8V-Mdv">
             <objects>
-                <viewController storyboardIdentifier="LeftViewController" title="Left View Controller" id="Kzo-Kj-67C" customClass="SidePanelViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SidePanelViewController" title="Left View Controller" id="Kzo-Kj-67C" userLabel="Side Panel View Controller" customClass="SidePanelViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U3c-bd-U6O"/>
                         <viewControllerLayoutGuide type="bottom" id="cfu-bu-gtL"/>
