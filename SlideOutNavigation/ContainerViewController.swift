@@ -34,7 +34,6 @@ class ContainerViewController: UIViewController {
   enum SlideOutState {
     case bothCollapsed
     case leftPanelExpanded
-    case rightPanelExpanded
   }
   
   var centerNavigationController: UINavigationController!
@@ -47,8 +46,6 @@ class ContainerViewController: UIViewController {
     }
   }
   var leftViewController: SidePanelViewController?
-  
-  var rightViewController: SidePanelViewController?
   
   let centerPanelExpandedOffset: CGFloat = 60
   
@@ -83,22 +80,9 @@ extension ContainerViewController: CenterViewControllerDelegate {
     animateLeftPanel(shouldExpand: notAlreadyExpanded)
   }
   
-  func toggleRightPanel() {
-    
-    let notAlreadyExpanded = (currentState != .rightPanelExpanded)
-    
-    if notAlreadyExpanded {
-      addRightPanelViewController()
-    }
-    
-    animateRightPanel(shouldExpand: notAlreadyExpanded)
-  }
-  
   func collapseSidePanels() {
     
     switch currentState {
-    case .rightPanelExpanded:
-      toggleRightPanel()
     case .leftPanelExpanded:
       toggleLeftPanel()
     default:
@@ -123,17 +107,6 @@ extension ContainerViewController: CenterViewControllerDelegate {
     
     addChildViewController(sidePanelController)
     sidePanelController.didMove(toParentViewController: self)
-  }
-  
-  func addRightPanelViewController() {
-    
-    guard rightViewController == nil else { return }
-    
-    if let vc = UIStoryboard.rightViewController() {
-      vc.animals = Animal.allDogs()
-      addChildSidePanelController(vc)
-      rightViewController = vc
-    }
   }
   
   func animateLeftPanel(shouldExpand: Bool) {
@@ -161,27 +134,12 @@ extension ContainerViewController: CenterViewControllerDelegate {
                    initialSpringVelocity: 0,
                    options: .curveEaseInOut,
                    animations: {
-                      let leftVC = self.leftViewController
-                      let leftWidth = leftVC?.view.bounds.width ?? 0
+//                      let leftVC = self.leftViewController
+//                      let leftWidth = leftVC?.view.bounds.width ?? 0
 //                      leftVC?.view.frame.origin.x = targetPosition - leftWidth
                       self.centerNavigationController.view.frame.origin.x = targetPosition
                    },
                    completion: completion)
-  }
-  
-  func animateRightPanel(shouldExpand: Bool) {
-    
-    if shouldExpand {
-      currentState = .rightPanelExpanded
-      animateCenterPanelXPosition(targetPosition: -centerNavigationController.view.frame.width + centerPanelExpandedOffset)
-      
-    } else {
-      animateCenterPanelXPosition(targetPosition: 0) { _ in
-        self.currentState = .bothCollapsed
-        self.rightViewController?.view.removeFromSuperview()
-        self.rightViewController = nil
-      }
-    }
   }
   
   func showShadowForCenterViewController(_ shouldShowShadow: Bool) {
@@ -207,8 +165,6 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       if currentState == .bothCollapsed {
         if gestureIsDraggingFromLeftToRight {
           addLeftPanelViewController()
-        } else {
-          addRightPanelViewController()
         }
         
         showShadowForCenterViewController(true)
@@ -216,7 +172,8 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       
     case .changed:
       if let rview = recognizer.view {
-        rview.center.x = rview.center.x + recognizer.translation(in: view).x
+        let newCenter = rview.center.x + recognizer.translation(in: view).x
+        rview.center.x = max(newCenter, rview.frame.width/2)
         recognizer.setTranslation(CGPoint.zero, in: view)
       }
       
@@ -227,11 +184,6 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
         let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
         animateLeftPanel(shouldExpand: hasMovedGreaterThanHalfway)
         
-      }
-      if let _ = rightViewController,
-        let rview = recognizer.view {
-        let hasMovedGreaterThanHalfway = rview.center.x < 0
-        animateRightPanel(shouldExpand: hasMovedGreaterThanHalfway)
       }
       
     default:
@@ -246,10 +198,6 @@ private extension UIStoryboard {
   
   static func leftViewController() -> SidePanelViewController? {
     return main().instantiateViewController(withIdentifier: "LeftViewController") as? SidePanelViewController
-  }
-  
-  static func rightViewController() -> SidePanelViewController? {
-    return nil
   }
   
   static func centerViewController() -> CenterViewController? {
