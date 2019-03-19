@@ -50,21 +50,16 @@ class ContainerViewController: UIViewController {
     super.viewDidLoad()
     
     let centerView = UIStoryboard.defaultViewController()
+    let sideView = UIStoryboard.defaultViewController()
     
     setCenterViewController(centerView)
+    setSidePanelViewController(sideView)
     
     centerView?.setText("Teste")
     centerView?.setColor(UIColor.lightGray)
     
-//    centerViewController = UIStoryboard.defaultViewController()
-//    centerViewController.containerDelegate = self
-//
-//    centerNavigationController = UINavigationController(rootViewController: centerViewController)
-//    centerNavigationController?.isNavigationBarHidden = true
-//    view.addSubview(centerNavigationController.view)
-//    addChildViewController(centerNavigationController)
-    
-//    centerNavigationController.didMove(toParentViewController: self)
+    sideView?.setText("Side Panel")
+    sideView?.setColor(UIColor.red)
     
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
     self.view.addGestureRecognizer(panGestureRecognizer)
@@ -81,16 +76,31 @@ class ContainerViewController: UIViewController {
       vc.didMove(toParentViewController: self)
     }
   }
+  
+  func setSidePanelViewController(_ vc : PanelViewController?) {
+    guard let vc = vc else { return }
+    
+    vc.containerDelegate = self
+    
+    view.addSubview(vc.view)
+    addChildViewController(vc)
+    vc.didMove(toParentViewController: self)
+    
+    let w = sidePanelRelativeWidth * vc.view.frame.width
+    let h = vc.view.frame.height
+    let x = -w
+    let y = vc.view.frame.origin.y
+    vc.view.frame = CGRect(x: x, y: y, width: w, height: h)
+    vc.view.layoutIfNeeded()
+    
+    sidePanelController = vc
+  }
 }
 
 // MARK: ContainerViewController delegate
 extension ContainerViewController: ContainerViewControllerDelegate {
   func toggleSidePanel() {
     let notAlreadyExpanded = (currentState != .expanded)
-    
-    if notAlreadyExpanded {
-      addSidePanelViewController()
-    }
     
     animateSidePanel(shouldExpand: notAlreadyExpanded)
   }
@@ -103,33 +113,6 @@ extension ContainerViewController: ContainerViewControllerDelegate {
     if(currentState == .expanded)  { toggleSidePanel() }
   }
   
-  func addSidePanelViewController() {
-    guard sidePanelController == nil else { return }
-    
-    if let vc = UIStoryboard.defaultViewController() {
-      vc.containerDelegate = self
-      view.addSubview(vc.view)
-      
-      addChildViewController(vc)
-      vc.didMove(toParentViewController: self)
-      
-      sidePanelController = vc
-      
-      setSidePanelStartingLayoutAndPosition()
-    }
-  }
-  
-  func setSidePanelStartingLayoutAndPosition() {
-    if let view = sidePanelController?.view {
-      let w = sidePanelRelativeWidth * view.frame.width
-      let h = view.frame.height
-      let x = -w
-      let y = view.frame.origin.y
-      view.frame = CGRect(x: x, y: y, width: w, height: h)
-      view.layoutIfNeeded()
-    }
-  }
-  
   func animateSidePanel(shouldExpand: Bool) {
     
     if shouldExpand {
@@ -139,8 +122,6 @@ extension ContainerViewController: ContainerViewControllerDelegate {
       if let width = sidePanelController?.view.bounds.width {
         animateSidePanelXPosition(targetPosition: -width) { _ in
           self.currentState = .collapsed
-          self.sidePanelController?.view.removeFromSuperview()
-          self.sidePanelController = nil
         }
       }
     }
@@ -168,10 +149,11 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     switch recognizer.state {
       
     case .began:
-      let prepareToExpand = (currentState == .collapsed) && gestureIsDraggingFromLeftToRight
-      if prepareToExpand {
-          addSidePanelViewController()
-      }
+//      let prepareToExpand = (currentState == .collapsed) && gestureIsDraggingFromLeftToRight
+//      if prepareToExpand {
+//          addSidePanelViewController()
+//      }
+      break
       
     case .changed:
 //      if let rview = recognizer.view {
