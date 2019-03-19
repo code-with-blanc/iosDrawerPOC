@@ -43,6 +43,7 @@ class ContainerViewController: UIViewController {
   var sidePanelController: SidePanelViewController?
   
   let centerPanelExpandedOffset: CGFloat = 60
+  let sidePanelRelativeWidth : CGFloat = 0.8
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -92,6 +93,19 @@ extension ContainerViewController: CenterViewControllerDelegate {
       vc.didMove(toParentViewController: self)
       
       sidePanelController = vc
+      
+      setSidePanelStartingLayoutAndPosition()
+    }
+  }
+  
+  func setSidePanelStartingLayoutAndPosition() {
+    if let view = sidePanelController?.view {
+      let w = sidePanelRelativeWidth * view.frame.width
+      let h = view.frame.height
+      let x = -w
+      let y = view.frame.origin.y
+      view.frame = CGRect(x: x, y: y, width: w, height: h)
+      view.layoutIfNeeded()
     }
   }
   
@@ -99,19 +113,14 @@ extension ContainerViewController: CenterViewControllerDelegate {
     
     if shouldExpand {
       currentState = .expanded
-      if let view = sidePanelController?.view {
-        let width = view.frame.width
-        view.frame.origin.x = -width
-        animateSidePanelXPosition(targetPosition: -0.0*width)
-      }
-      
-//      animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+      animateSidePanelXPosition(targetPosition: 0)
     } else {
-      
-      animateCenterPanelXPosition(targetPosition: 0) { _ in
-        self.currentState = .collapsed
-        self.sidePanelController?.view.removeFromSuperview()
-        self.sidePanelController = nil
+      if let width = sidePanelController?.view.bounds.width {
+        animateSidePanelXPosition(targetPosition: -width) { _ in
+          self.currentState = .collapsed
+          self.sidePanelController?.view.removeFromSuperview()
+          self.sidePanelController = nil
+        }
       }
     }
   }
@@ -128,10 +137,8 @@ extension ContainerViewController: CenterViewControllerDelegate {
   }
   
   func animateSidePanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
-    UIView.animate(withDuration: 1.0, delay: 0,
-                   usingSpringWithDamping: 0.8,
-                   initialSpringVelocity: 0,
-                   options: .curveEaseInOut,
+    UIView.animate(withDuration: 0.7, delay: 0,
+                   options: .curveEaseOut,
                    animations: {
                     if let vc = self.sidePanelController {
                       vc.view.frame.origin.x = targetPosition
@@ -157,11 +164,12 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       }
       
     case .changed:
-      if let rview = recognizer.view {
-        let newCenter = rview.center.x + recognizer.translation(in: view).x
-        rview.center.x = max(newCenter, rview.frame.width/2)
-        recognizer.setTranslation(CGPoint.zero, in: view)
-      }
+//      if let rview = recognizer.view {
+//        let newCenter = rview.center.x + recognizer.translation(in: view).x
+//        rview.center.x = max(newCenter, rview.frame.width/2)
+//        recognizer.setTranslation(CGPoint.zero, in: view)
+//      }
+      break
       
     case .ended:
       if let _ = sidePanelController,
