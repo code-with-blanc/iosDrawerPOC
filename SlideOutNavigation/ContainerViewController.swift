@@ -39,12 +39,7 @@ class ContainerViewController: UIViewController {
   var centerNavigationController: UINavigationController!
   var centerViewController: CenterViewController!
   
-  var currentState: SlideOutState = .bothCollapsed {
-    didSet {
-      let shouldShowShadow = currentState != .bothCollapsed
-      showShadowForCenterViewController(shouldShowShadow)
-    }
-  }
+  var currentState: SlideOutState = .bothCollapsed
   var leftViewController: SidePanelViewController?
   
   let centerPanelExpandedOffset: CGFloat = 60
@@ -141,14 +136,6 @@ extension ContainerViewController: CenterViewControllerDelegate {
                    },
                    completion: completion)
   }
-  
-  func showShadowForCenterViewController(_ shouldShowShadow: Bool) {
-    if shouldShowShadow {
-      centerNavigationController.view.layer.shadowOpacity = 0.8
-    } else {
-      centerNavigationController.view.layer.shadowOpacity = 0.0
-    }
-  }
 }
 
 // MARK: Gesture recognizer
@@ -166,8 +153,6 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
         if gestureIsDraggingFromLeftToRight {
           addLeftPanelViewController()
         }
-        
-        showShadowForCenterViewController(true)
       }
       
     case .changed:
