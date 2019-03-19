@@ -37,10 +37,11 @@ class ContainerViewController: UIViewController {
   }
   
   var centerNavigationController: UINavigationController!
-  var centerViewController: CenterViewController!
+  
+  var centerViewController: PanelViewController!
+  var sidePanelController: UIViewController?
   
   var currentState: SlideOutState = .collapsed
-  var sidePanelController: SidePanelViewController?
   
   let centerPanelExpandedOffset: CGFloat = 60
   let sidePanelRelativeWidth : CGFloat = 0.8
@@ -48,22 +49,41 @@ class ContainerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    centerViewController = UIStoryboard.centerViewController()
-    centerViewController.delegate = self
+    let centerView = UIStoryboard.defaultViewController()
     
-    centerNavigationController = UINavigationController(rootViewController: centerViewController)
-    centerViewController.navigationController?.isNavigationBarHidden = true
-    view.addSubview(centerNavigationController.view)
-    addChildViewController(centerNavigationController)
+    setCenterViewController(centerView)
     
-    centerNavigationController.didMove(toParentViewController: self)
+    centerView?.setText("Teste")
+    centerView?.setColor(UIColor.lightGray)
+    
+//    centerViewController = UIStoryboard.defaultViewController()
+//    centerViewController.containerDelegate = self
+//
+//    centerNavigationController = UINavigationController(rootViewController: centerViewController)
+//    centerNavigationController?.isNavigationBarHidden = true
+//    view.addSubview(centerNavigationController.view)
+//    addChildViewController(centerNavigationController)
+    
+//    centerNavigationController.didMove(toParentViewController: self)
     
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-    centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
+    self.view.addGestureRecognizer(panGestureRecognizer)
+  }
+
+  func setCenterViewController(_ vc : PanelViewController?) {
+    if let vc = vc {
+      centerViewController = vc
+      centerViewController?.containerDelegate = self
+      
+      
+      self.view.addSubview(vc.view)
+      addChildViewController(centerViewController)
+      vc.didMove(toParentViewController: self)
+    }
   }
 }
 
-// MARK: CenterViewController delegate
+// MARK: ContainerViewController delegate
 extension ContainerViewController: ContainerViewControllerDelegate {
   func toggleSidePanel() {
     let notAlreadyExpanded = (currentState != .expanded)
@@ -86,8 +106,8 @@ extension ContainerViewController: ContainerViewControllerDelegate {
   func addSidePanelViewController() {
     guard sidePanelController == nil else { return }
     
-    if let vc = UIStoryboard.sidePanelViewController() {
-      vc.delegate = self
+    if let vc = UIStoryboard.defaultViewController() {
+      vc.containerDelegate = self
       view.addSubview(vc.view)
       
       addChildViewController(vc)
@@ -179,11 +199,10 @@ private extension UIStoryboard {
   
   static func main() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
   
-  static func sidePanelViewController() -> SidePanelViewController? {
-    return main().instantiateViewController(withIdentifier: "SidePanelViewController") as? SidePanelViewController
-  }
   
-  static func centerViewController() -> CenterViewController? {
-    return main().instantiateViewController(withIdentifier: "CenterViewController") as? CenterViewController
+  
+  static func defaultViewController() -> DefaultViewController? {
+    let sb = UIStoryboard(name: "DefaultView", bundle: Bundle.main)
+    return sb.instantiateViewController(withIdentifier: "DefaultViewController") as? DefaultViewController
   }
 }

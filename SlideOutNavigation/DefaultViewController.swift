@@ -28,15 +28,23 @@
 
 import UIKit
 
-class CenterViewController: UIViewController {
-  var delegate: ContainerViewControllerDelegate?
+class DefaultViewController: PanelViewController {
+  @IBOutlet weak var label: UILabel!
+  
+  func setText(_ text : String?) {
+    label?.text = text
+  }
+  
+  func setColor(_ color : UIColor) {
+    self.view?.backgroundColor = color
+  }
   
   // MARK: Button actions
   @IBAction func openTapped(_ sender: Any) {
-    delegate?.expandSidePanel()
+    containerDelegate?.expandSidePanel()
   }
   
   @IBAction func closeTapped(_ sender: Any) {
-    delegate?.collapseSidePanel()
+    containerDelegate?.collapseSidePanel()
   }
 }

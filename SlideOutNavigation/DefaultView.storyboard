@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Center View Controller-->
+        <scene sceneID="iu1-Qk-sdH">
+            <objects>
+                <viewController storyboardIdentifier="DefaultViewController" title="Center View Controller" id="bTV-Xu-Bsi" customClass="DefaultViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cgD-aa-sY8"/>
+                        <viewControllerLayoutGuide type="bottom" id="8s6-V4-TZC"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b5O-Gh-oZ3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vvw-Yc-9Ir">
+                                <rect key="frame" x="67.5" y="372" width="60" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="8hx-NN-Lfc"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Open">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="openTapped:" destination="bTV-Xu-Bsi" eventType="touchUpInside" id="yN9-Lc-gMk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m4b-4I-qh1">
+                                <rect key="frame" x="247.5" y="372" width="60" height="34"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="0b3-ip-5yL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Close">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeTapped:" destination="bTV-Xu-Bsi" eventType="touchUpInside" id="8fe-U2-1co"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Center View replaces this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ejg-YU-1OE">
+                                <rect key="frame" x="67" y="320" width="241" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.71026417350000004" green="0.55465999119999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="m4b-4I-qh1" firstAttribute="centerX" secondItem="b5O-Gh-oZ3" secondAttribute="centerX" constant="90" id="8v9-ZL-gk3"/>
+                            <constraint firstItem="Vvw-Yc-9Ir" firstAttribute="centerX" secondItem="b5O-Gh-oZ3" secondAttribute="centerX" constant="-90" id="Ixh-TS-y61"/>
+                            <constraint firstItem="ejg-YU-1OE" firstAttribute="centerY" secondItem="b5O-Gh-oZ3" secondAttribute="centerY" id="byz-FV-lOP"/>
+                            <constraint firstItem="Vvw-Yc-9Ir" firstAttribute="top" secondItem="ejg-YU-1OE" secondAttribute="bottom" constant="25" id="dTi-cI-hft"/>
+                            <constraint firstItem="ejg-YU-1OE" firstAttribute="centerX" secondItem="b5O-Gh-oZ3" secondAttribute="centerX" id="jTN-AS-Us8"/>
+                            <constraint firstItem="m4b-4I-qh1" firstAttribute="top" secondItem="ejg-YU-1OE" secondAttribute="bottom" constant="25" id="vor-m2-ew5"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5SY-v2-Xh6"/>
+                    </view>
+                    <connections>
+                        <outlet property="label" destination="ejg-YU-1OE" id="tWD-nm-0Yg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4Xa-bU-q5N" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="304.80000000000001" y="381.85907046476763"/>
+        </scene>
+    </scenes>
+</document>

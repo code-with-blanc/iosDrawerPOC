@@ -12,7 +12,7 @@
         <!--Center View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController storyboardIdentifier="CenterViewController" title="Center View Controller" id="vXZ-lx-hvc" customClass="CenterViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CenterViewController" title="Center View Controller" id="vXZ-lx-hvc" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -20,51 +20,7 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A1H-KU-WcW">
-                                <rect key="frame" x="67.5" y="372" width="60" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="Lfn-V7-TeB"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Open">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="openTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="93b-Hk-ef3"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uju-sN-irf">
-                                <rect key="frame" x="247.5" y="372" width="60" height="34"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="jQl-8z-II0"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Close">
-                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dSf-jC-ocE"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Center View replaces this" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41h-zK-xAI">
-                                <rect key="frame" x="67" y="320" width="241" height="27"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <color key="backgroundColor" red="0.71026417350000004" green="0.55465999119999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="A1H-KU-WcW" firstAttribute="top" secondItem="41h-zK-xAI" secondAttribute="bottom" constant="25" id="2oY-0M-HqM"/>
-                            <constraint firstItem="A1H-KU-WcW" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="-90" id="9f2-gh-e5q"/>
-                            <constraint firstItem="uju-sN-irf" firstAttribute="top" secondItem="41h-zK-xAI" secondAttribute="bottom" constant="25" id="9ut-nd-hUp"/>
-                            <constraint firstItem="41h-zK-xAI" firstAttribute="centerY" secondItem="kh9-bI-dsS" secondAttribute="centerY" id="Wef-b3-kdT"/>
-                            <constraint firstItem="41h-zK-xAI" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" id="Yfe-eq-1RI"/>
-                            <constraint firstItem="uju-sN-irf" firstAttribute="centerX" secondItem="kh9-bI-dsS" secondAttribute="centerX" constant="90" id="qj6-6W-hmr"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -74,7 +30,7 @@
         <!--Side Panel View Controller-->
         <scene sceneID="1ll-8V-Mdv">
             <objects>
-                <viewController storyboardIdentifier="SidePanelViewController" title="Left View Controller" id="Kzo-Kj-67C" userLabel="Side Panel View Controller" customClass="SidePanelViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SidePanelViewController" title="Left View Controller" id="Kzo-Kj-67C" userLabel="Side Panel View Controller" customClass="DefaultViewController" customModule="HomeDrawerPOC" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="U3c-bd-U6O"/>
                         <viewControllerLayoutGuide type="bottom" id="cfu-bu-gtL"/>
@@ -101,7 +57,7 @@
                                     <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <action selector="closeTapped:" destination="Kzo-Kj-67C" eventType="touchUpInside" id="Bjp-Vm-ih6"/>
+                                    <action selector="closeTapped:" destination="Kzo-Kj-67C" eventType="touchUpInside" id="zF7-mW-ZlF"/>
                                 </connections>
                             </button>
                         </subviews>
