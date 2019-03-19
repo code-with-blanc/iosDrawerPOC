@@ -41,6 +41,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window!.rootViewController = containerViewController
     window!.makeKeyAndVisible()
     
+    let centerView = UIStoryboard.defaultViewController()
+    let sideView = UIStoryboard.defaultViewController()
+    
+    containerViewController.setCenterViewController(centerView)
+    containerViewController.setSidePanelViewController(sideView)
+    
+    centerView?.setText("Teste")
+    centerView?.setColor(UIColor.lightGray)
+    
+    sideView?.setText("Side Panel")
+    sideView?.setColor(UIColor.red)
+    
     return true
   }
 }
+
+private extension UIStoryboard {
+  
+  static func main() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
+  
+  static func defaultViewController() -> DefaultViewController? {
+    let sb = UIStoryboard(name: "DefaultView", bundle: Bundle.main)
+    return sb.instantiateViewController(withIdentifier: "DefaultViewController") as? DefaultViewController
+  }
+}
+

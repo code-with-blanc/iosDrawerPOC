@@ -49,18 +49,6 @@ class ContainerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    let centerView = UIStoryboard.defaultViewController()
-    let sideView = UIStoryboard.defaultViewController()
-    
-    setCenterViewController(centerView)
-    setSidePanelViewController(sideView)
-    
-    centerView?.setText("Teste")
-    centerView?.setColor(UIColor.lightGray)
-    
-    sideView?.setText("Side Panel")
-    sideView?.setColor(UIColor.red)
-    
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
     self.view.addGestureRecognizer(panGestureRecognizer)
   }
@@ -134,7 +122,7 @@ extension ContainerViewController: ContainerViewControllerDelegate {
                     if let vc = self.sidePanelController {
                       vc.view.frame.origin.x = targetPosition
                     }
-                   },
+    },
                    completion: completion)
   }
 }
@@ -174,17 +162,5 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
     default:
       break
     }
-  }
-}
-
-private extension UIStoryboard {
-  
-  static func main() -> UIStoryboard { return UIStoryboard(name: "Main", bundle: Bundle.main) }
-  
-  
-  
-  static func defaultViewController() -> DefaultViewController? {
-    let sb = UIStoryboard(name: "DefaultView", bundle: Bundle.main)
-    return sb.instantiateViewController(withIdentifier: "DefaultViewController") as? DefaultViewController
   }
 }
