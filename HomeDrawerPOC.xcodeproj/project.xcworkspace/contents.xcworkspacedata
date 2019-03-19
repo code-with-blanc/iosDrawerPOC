@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:HomeDrawerPOC.xcodeproj">
+      location = "self:/Users/blanc/Documents/HomeDrawerPOC/HomeDrawerPOC.xcodeproj">
    </FileRef>
 </Workspace>
