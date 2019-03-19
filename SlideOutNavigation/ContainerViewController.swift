@@ -43,8 +43,8 @@ class ContainerViewController: UIViewController {
   
   var currentState: SlideOutState = .collapsed
   
-  let centerPanelExpandedOffset: CGFloat = 60
-  let sidePanelRelativeWidth : CGFloat = 0.8
+  let sidePanelRelativeWidth : CGFloat = 1.0
+  let sidePanelCollapsedOffset : CGFloat = 20
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -76,7 +76,7 @@ class ContainerViewController: UIViewController {
     
     let w = sidePanelRelativeWidth * vc.view.frame.width
     let h = vc.view.frame.height
-    let x = -w
+    let x = -w + sidePanelCollapsedOffset
     let y = vc.view.frame.origin.y
     vc.view.frame = CGRect(x: x, y: y, width: w, height: h)
     vc.view.layoutIfNeeded()
@@ -108,7 +108,7 @@ extension ContainerViewController: ContainerViewControllerDelegate {
       animateSidePanelXPosition(targetPosition: 0)
     } else {
       if let width = sidePanelController?.view.bounds.width {
-        animateSidePanelXPosition(targetPosition: -width) { _ in
+        animateSidePanelXPosition(targetPosition: -width + sidePanelCollapsedOffset) { _ in
           self.currentState = .collapsed
         }
       }
@@ -116,7 +116,7 @@ extension ContainerViewController: ContainerViewControllerDelegate {
   }
   
   func animateSidePanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
-    UIView.animate(withDuration: 0.5, delay: 0,
+    UIView.animate(withDuration: 0.3, delay: 0,
                    options: .curveEaseOut,
                    animations: {
                     if let vc = self.sidePanelController {

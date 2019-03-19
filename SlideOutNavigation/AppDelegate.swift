@@ -47,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     containerViewController.setCenterViewController(centerView)
     containerViewController.setSidePanelViewController(sideView)
     
-    centerView?.setText("Teste")
+    centerView?.setText("Center Panel")
     centerView?.setColor(UIColor.lightGray)
     
     sideView?.setText("Side Panel")
