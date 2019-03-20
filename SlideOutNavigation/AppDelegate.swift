@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let sideView = UIStoryboard.defaultViewController()
     
     containerViewController.setCenterViewController(centerView)
-    containerViewController.setSidePanelViewController(sideView)
+//    containerViewController.setSidePanelViewController(sideView)
     
     centerView?.setText("Center Panel")
     centerView?.setColor(UIColor.lightGray)

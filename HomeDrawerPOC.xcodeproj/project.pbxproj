@@ -12,9 +12,11 @@
 		17C4DFD0198E428000E0B395 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C4DFCF198E428000E0B395 /* AppDelegate.swift */; };
 		17C4DFD5198E428000E0B395 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 17C4DFD3198E428000E0B395 /* Main.storyboard */; };
 		17C4E01F198E477C00E0B395 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C4E01E198E477C00E0B395 /* DefaultViewController.swift */; };
+		C60AF066224290FC0051797D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C60AF065224290FC0051797D /* Images.xcassets */; };
 		C68AEAC62241576A0083583E /* ContainerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */; };
 		C68AEAC822415ED70083583E /* DefaultView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C68AEAC722415ED70083583E /* DefaultView.storyboard */; };
 		C68AEACA224164970083583E /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEAC9224164970083583E /* PanelViewController.swift */; };
+		C68AEACC22428F7E0083583E /* SidePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEACB22428F7E0083583E /* SidePanelView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,9 +27,11 @@
 		17C4DFCF198E428000E0B395 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		17C4DFD4198E428000E0B395 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		17C4E01E198E477C00E0B395 /* DefaultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
+		C60AF065224290FC0051797D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C68AEAC722415ED70083583E /* DefaultView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DefaultView.storyboard; sourceTree = "<group>"; };
 		C68AEAC9224164970083583E /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
+		C68AEACB22428F7E0083583E /* SidePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,10 +70,12 @@
 				178B5A5C198E7379006414ED /* ContainerViewController.swift */,
 				C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */,
 				C68AEAC9224164970083583E /* PanelViewController.swift */,
+				C68AEACB22428F7E0083583E /* SidePanelView.swift */,
 				17C4E01E198E477C00E0B395 /* DefaultViewController.swift */,
 				17C4DFD3198E428000E0B395 /* Main.storyboard */,
 				C68AEAC722415ED70083583E /* DefaultView.storyboard */,
 				179191C81A1D4F0D00072138 /* LaunchScreen.xib */,
+				C60AF065224290FC0051797D /* Images.xcassets */,
 				17C4DFCD198E428000E0B395 /* Supporting Files */,
 			);
 			path = SlideOutNavigation;
@@ -143,6 +149,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				17C4DFD5198E428000E0B395 /* Main.storyboard in Resources */,
+				C60AF066224290FC0051797D /* Images.xcassets in Resources */,
 				C68AEAC822415ED70083583E /* DefaultView.storyboard in Resources */,
 				179191C91A1D4F0D00072138 /* LaunchScreen.xib in Resources */,
 			);
@@ -155,6 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C68AEACC22428F7E0083583E /* SidePanelView.swift in Sources */,
 				17C4DFD0198E428000E0B395 /* AppDelegate.swift in Sources */,
 				C68AEACA224164970083583E /* PanelViewController.swift in Sources */,
 				178B5A5D198E7379006414ED /* ContainerViewController.swift in Sources */,

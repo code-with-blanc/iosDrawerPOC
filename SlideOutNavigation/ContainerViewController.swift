@@ -39,7 +39,7 @@ class ContainerViewController: UIViewController {
   var centerNavigationController: UINavigationController!
   
   var centerViewController: PanelViewController!
-  var sidePanelController: UIViewController?
+  var sidePanelView: SidePanelView!
   
   var currentState: SlideOutState = .collapsed
   
@@ -48,6 +48,16 @@ class ContainerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    sidePanelView = SidePanelView()
+    view.addSubview(sidePanelView)
+    view.layoutIfNeeded()
+    
+    let w = sidePanelView.frame.width
+    let h = sidePanelView.frame.height
+    let x = -w + sidePanelCollapsedOffset
+    let y = sidePanelView.frame.origin.y
+    sidePanelView.frame = CGRect(x: x, y: y, width: w, height: h)
     
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
     self.view.addGestureRecognizer(panGestureRecognizer)
@@ -58,30 +68,29 @@ class ContainerViewController: UIViewController {
       centerViewController = vc
       centerViewController?.containerDelegate = self
       
-      
-      self.view.addSubview(vc.view)
+      self.view.insertSubview(vc.view, at: 0)
       addChildViewController(centerViewController)
       vc.didMove(toParentViewController: self)
     }
   }
   
   func setSidePanelViewController(_ vc : PanelViewController?) {
-    guard let vc = vc else { return }
-    
-    vc.containerDelegate = self
-    
-    view.addSubview(vc.view)
-    addChildViewController(vc)
-    vc.didMove(toParentViewController: self)
-    
-    let w = sidePanelRelativeWidth * vc.view.frame.width
-    let h = vc.view.frame.height
-    let x = -w + sidePanelCollapsedOffset
-    let y = vc.view.frame.origin.y
-    vc.view.frame = CGRect(x: x, y: y, width: w, height: h)
-    vc.view.layoutIfNeeded()
-    
-    sidePanelController = vc
+//    guard let vc = vc else { return }
+//
+//    vc.containerDelegate = self
+//
+//    view.addSubview(vc.view)
+//    addChildViewController(vc)
+//    vc.didMove(toParentViewController: self)
+//
+//    let w = sidePanelRelativeWidth * vc.view.frame.width
+//    let h = vc.view.frame.height
+//    let x = -w + sidePanelCollapsedOffset
+//    let y = vc.view.frame.origin.y
+//    vc.view.frame = CGRect(x: x, y: y, width: w, height: h)
+//    vc.view.layoutIfNeeded()
+//
+//    sidePanelViewController = vc
   }
 }
 
@@ -102,12 +111,11 @@ extension ContainerViewController: ContainerViewControllerDelegate {
   }
   
   func animateSidePanel(shouldExpand: Bool) {
-    
     if shouldExpand {
       currentState = .expanded
       animateSidePanelXPosition(targetPosition: 0)
     } else {
-      if let width = sidePanelController?.view.bounds.width {
+      if let width = sidePanelView?.bounds.width {
         animateSidePanelXPosition(targetPosition: -width + sidePanelCollapsedOffset) { _ in
           self.currentState = .collapsed
         }
@@ -119,8 +127,8 @@ extension ContainerViewController: ContainerViewControllerDelegate {
     UIView.animate(withDuration: 0.3, delay: 0,
                    options: .curveEaseOut,
                    animations: {
-                    if let vc = self.sidePanelController {
-                      vc.view.frame.origin.x = targetPosition
+                    if let view = self.sidePanelView {
+                      view.frame.origin.x = targetPosition
                     }
     },
                    completion: completion)
@@ -152,7 +160,7 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       break
       
     case .ended:
-      if let _ = sidePanelController,
+      if let _ = sidePanelView,
         let rview = recognizer.view {
         // animate the side panel open or closed based on whether the view has moved more or less than halfway
         let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
