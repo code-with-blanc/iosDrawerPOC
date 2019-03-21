@@ -16,7 +16,7 @@
 		C68AEAC62241576A0083583E /* ContainerViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */; };
 		C68AEAC822415ED70083583E /* DefaultView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C68AEAC722415ED70083583E /* DefaultView.storyboard */; };
 		C68AEACA224164970083583E /* PanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEAC9224164970083583E /* PanelViewController.swift */; };
-		C68AEACC22428F7E0083583E /* SidePanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEACB22428F7E0083583E /* SidePanelView.swift */; };
+		C68AEACC22428F7E0083583E /* ContentWithTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68AEACB22428F7E0083583E /* ContentWithTabView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewControllerDelegate.swift; sourceTree = "<group>"; };
 		C68AEAC722415ED70083583E /* DefaultView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DefaultView.storyboard; sourceTree = "<group>"; };
 		C68AEAC9224164970083583E /* PanelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelViewController.swift; sourceTree = "<group>"; };
-		C68AEACB22428F7E0083583E /* SidePanelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidePanelView.swift; sourceTree = "<group>"; };
+		C68AEACB22428F7E0083583E /* ContentWithTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentWithTabView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +70,7 @@
 				178B5A5C198E7379006414ED /* ContainerViewController.swift */,
 				C68AEAC52241576A0083583E /* ContainerViewControllerDelegate.swift */,
 				C68AEAC9224164970083583E /* PanelViewController.swift */,
-				C68AEACB22428F7E0083583E /* SidePanelView.swift */,
+				C68AEACB22428F7E0083583E /* ContentWithTabView.swift */,
 				17C4E01E198E477C00E0B395 /* DefaultViewController.swift */,
 				17C4DFD3198E428000E0B395 /* Main.storyboard */,
 				C68AEAC722415ED70083583E /* DefaultView.storyboard */,
@@ -162,7 +162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C68AEACC22428F7E0083583E /* SidePanelView.swift in Sources */,
+				C68AEACC22428F7E0083583E /* ContentWithTabView.swift in Sources */,
 				17C4DFD0198E428000E0B395 /* AppDelegate.swift in Sources */,
 				C68AEACA224164970083583E /* PanelViewController.swift in Sources */,
 				178B5A5D198E7379006414ED /* ContainerViewController.swift in Sources */,

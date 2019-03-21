@@ -8,12 +8,19 @@
 
 import UIKit
 
-class SidePanelView : UIView {
+class ContentWithTabView : UIView {
   private let tabImageView = UIImageView()
   private var contentViewController = UIViewController()
   
-  private var contentSize = CGSize(width: 0, height: 0)
-  private var tabSize = CGSize(width: 40, height: 50)
+  private var tabSize = CGSize(width: 70, height: 50)
+  var contentSize = CGSize(width: 160, height: 250)
+  var tabWidth : CGFloat {
+    get { return tabSize.width }
+    set {
+      tabSize.width = newValue
+      self.layoutIfNeeded()
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -25,7 +32,12 @@ class SidePanelView : UIView {
     createViews()
   }
   
-  func createViews() {
+  func setContentSize(_ newSize : CGSize) {
+    contentSize = newSize
+    self.layoutIfNeeded()
+  }
+  
+  private func createViews() {
     if let tabImg = UIImage(named: "eco_menu") {
       tabImageView.image = tabImg
       tabImageView.bounds.size = tabSize
@@ -34,24 +46,22 @@ class SidePanelView : UIView {
     
     contentViewController.view.backgroundColor = UIColor.red
     contentViewController.view.alpha = 0.6
-    contentSize = CGSize(width: 100, height: 300)
     
     self.backgroundColor = UIColor.blue
     
     self.addSubview(contentViewController.view)
     self.addSubview(tabImageView)
+
+    layoutSubviews()
   }
   
   override func layoutSubviews() {
-    let origin = self.frame.origin
-    let tabSize = tabImageView.frame.size
-    
-    self.frame = CGRect(x: origin.x,
+    self.frame = CGRect(x: self.frame.origin.x,
                         y: 100,
                         width: contentSize.width + tabSize.width,
                         height: contentSize.height )
     
-    tabImageView.frame = CGRect(x: self.frame.maxX - tabSize.width,
+    tabImageView.frame = CGRect(x: self.frame.width - tabSize.width,
                                 y: contentSize.height/2 - tabSize.height/2,
                                 width: tabSize.width,
                                 height: tabSize.height )
@@ -59,4 +69,5 @@ class SidePanelView : UIView {
     contentViewController.view.frame.size = contentSize
     contentViewController.view.frame.origin = CGPoint(x: 0, y: 0)
   }
+  
 }

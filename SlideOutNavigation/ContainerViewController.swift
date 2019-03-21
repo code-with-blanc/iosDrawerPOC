@@ -39,7 +39,7 @@ class ContainerViewController: UIViewController {
   var centerNavigationController: UINavigationController!
   
   var centerViewController: PanelViewController!
-  var sidePanelView: SidePanelView!
+  var sidePanelView: ContentWithTabView!
   
   var currentState: SlideOutState = .collapsed
   
@@ -49,20 +49,24 @@ class ContainerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    sidePanelView = SidePanelView()
+    sidePanelView = ContentWithTabView()
+    sidePanelView.tabWidth = 30
     view.addSubview(sidePanelView)
-    view.layoutIfNeeded()
     
-    let w = sidePanelView.frame.width
-    let h = sidePanelView.frame.height
-    let x = -w + sidePanelCollapsedOffset
-    let y = sidePanelView.frame.origin.y
-    sidePanelView.frame = CGRect(x: x, y: y, width: w, height: h)
+    moveSidePanelOutsideScreen()
     
     let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
     self.view.addGestureRecognizer(panGestureRecognizer)
   }
 
+  func moveSidePanelOutsideScreen() {
+    let w = sidePanelView.frame.width
+    let h = sidePanelView.frame.height
+    let x = -w + sidePanelView.tabWidth
+    let y = sidePanelView.frame.origin.y
+    sidePanelView.frame = CGRect(x: x, y: y, width: w, height: h)
+  }
+  
   func setCenterViewController(_ vc : PanelViewController?) {
     if let vc = vc {
       centerViewController = vc
@@ -116,7 +120,7 @@ extension ContainerViewController: ContainerViewControllerDelegate {
       animateSidePanelXPosition(targetPosition: 0)
     } else {
       if let width = sidePanelView?.bounds.width {
-        animateSidePanelXPosition(targetPosition: -width + sidePanelCollapsedOffset) { _ in
+        animateSidePanelXPosition(targetPosition: -width + sidePanelView.tabWidth) { _ in
           self.currentState = .collapsed
         }
       }
