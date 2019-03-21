@@ -13,7 +13,8 @@ class ContentWithTabView : UIView {
   private var contentViewController = UIViewController()
   
   private var tabSize = CGSize(width: 70, height: 50)
-  var contentSize = CGSize(width: 160, height: 250)
+  private var contentSize = CGSize(width: 160, height: 250)
+  
   var tabWidth : CGFloat {
     get { return tabSize.width }
     set {
@@ -21,6 +22,9 @@ class ContentWithTabView : UIView {
       recalculateFrameSize()
       self.setNeedsLayout()
     }
+  }
+  var contentWidth : CGFloat {
+    get { return contentSize.width }
   }
   
   override init(frame: CGRect) {

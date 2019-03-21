@@ -51,8 +51,7 @@ class ContainerViewController: UIViewController {
     
     moveSidePanelOutsideScreen()
     
-    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
-    self.view.addGestureRecognizer(panGestureRecognizer)
+    setupGestureRecognizers()
   }
 
   func moveSidePanelOutsideScreen() {
@@ -124,40 +123,44 @@ extension ContainerViewController: ContainerViewControllerDelegate {
   }
 }
 
-// MARK: Gesture recognizer
+// MARK: Pan Gesture recognizer
 extension ContainerViewController: UIGestureRecognizerDelegate {
+  private func setupGestureRecognizers() {
+    let panGestureRecognizer = UIPanGestureRecognizer(
+      target: self,
+      action: #selector(handlePanGesture(_:)) )
+    sidePanelView.addGestureRecognizer(panGestureRecognizer)
+    
+    let tapGestureRecognizer = UITapGestureRecognizer(
+      target: self,
+      action: #selector(handleTapGesture))
+    sidePanelView.addGestureRecognizer(tapGestureRecognizer)
+  }
   
   @objc func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
-    
-    let gestureIsDraggingFromLeftToRight = (recognizer.velocity(in: view).x > 0)
-    
-    switch recognizer.state {
-      
-    case .began:
-//      let prepareToExpand = (currentState == .collapsed) && gestureIsDraggingFromLeftToRight
-//      if prepareToExpand {
-//          addSidePanelViewController()
-//      }
-      break
-      
+    switch recognizer.state
+    {
     case .changed:
-//      if let rview = recognizer.view {
-//        let newCenter = rview.center.x + recognizer.translation(in: view).x
-//        rview.center.x = max(newCenter, rview.frame.width/2)
-//        recognizer.setTranslation(CGPoint.zero, in: view)
-//      }
+      if currentState != .expanded {
+        let translation = recognizer.translation(in: view).x
+        let xCollapsed = -sidePanelView.contentWidth
+        sidePanelView.frame.origin.x = xCollapsed + translation
+      }
       break
       
     case .ended:
-      if let _ = sidePanelView,
-        let rview = recognizer.view {
-        // animate the side panel open or closed based on whether the view has moved more or less than halfway
-        let hasMovedGreaterThanHalfway = rview.center.x > view.bounds.size.width
-        animateSidePanel(shouldExpand: hasMovedGreaterThanHalfway)
-      }
+      let sidePanelMaxX = sidePanelView.frame.maxX
+      let centerW = view.bounds.size.width
+      let shouldExpand = (sidePanelMaxX > 0.15 * centerW)
+
+      animateSidePanel(shouldExpand: shouldExpand)
       
     default:
       break
     }
+  }
+  
+  @objc func handleTapGesture() {
+    animateSidePanel(shouldExpand: true)
   }
 }
