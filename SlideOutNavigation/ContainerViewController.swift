@@ -45,7 +45,7 @@ class ContainerViewController: UIViewController {
     super.viewDidLoad()
     
     sidePanelView = ContentWithTabView()
-    sidePanelView.tabWidth = 30
+    sidePanelView.tabWidth = 60
     sidePanelView.setContentSize(UIScreen.main.bounds.size)
     view.addSubview(sidePanelView)
     
