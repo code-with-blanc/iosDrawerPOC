@@ -39,6 +39,18 @@ class ContentWithTabView : UIView {
     self.setNeedsLayout()
   }
   
+  func setContentViewController(_ vc : UIViewController, parentVC: UIViewController) {
+    contentViewController.willMove(toParentViewController: nil)
+    contentViewController.view.removeFromSuperview()
+    contentViewController.removeFromParentViewController()
+    
+    contentViewController = vc
+    
+    self.addSubview(contentViewController.view)
+    parentVC.addChildViewController(vc)
+    vc.didMove(toParentViewController: parentVC)
+  }
+  
   private func createViews() {
     if let tabImg = UIImage(named: "eco_menu") {
       tabImageView.image = tabImg

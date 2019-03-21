@@ -36,15 +36,10 @@ class ContainerViewController: UIViewController {
     case expanded
   }
   
-  var centerNavigationController: UINavigationController!
+  var currentState: SlideOutState = .collapsed
   
   var centerViewController: PanelViewController!
   var sidePanelView: ContentWithTabView!
-  
-  var currentState: SlideOutState = .collapsed
-  
-  let sidePanelRelativeWidth : CGFloat = 1.0
-  let sidePanelCollapsedOffset : CGFloat = 20
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -80,22 +75,11 @@ class ContainerViewController: UIViewController {
   }
   
   func setSidePanelViewController(_ vc : PanelViewController?) {
-//    guard let vc = vc else { return }
-//
-//    vc.containerDelegate = self
-//
-//    view.addSubview(vc.view)
-//    addChildViewController(vc)
-//    vc.didMove(toParentViewController: self)
-//
-//    let w = sidePanelRelativeWidth * vc.view.frame.width
-//    let h = vc.view.frame.height
-//    let x = -w + sidePanelCollapsedOffset
-//    let y = vc.view.frame.origin.y
-//    vc.view.frame = CGRect(x: x, y: y, width: w, height: h)
-//    vc.view.layoutIfNeeded()
-//
-//    sidePanelViewController = vc
+    guard let vc = vc else { return }
+    
+    vc.containerDelegate = self
+    
+    sidePanelView.setContentViewController(vc, parentVC: self)
   }
 }
 
