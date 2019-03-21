@@ -53,6 +53,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     sideView?.setText("Side Panel")
     sideView?.setColor(UIColor.red)
     
+    let arrow = UIImage(named: "eco_menu")
+    containerViewController.setTabImage(arrow)
+    
     return true
   }
 }

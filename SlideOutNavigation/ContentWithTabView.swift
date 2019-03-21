@@ -43,6 +43,12 @@ class ContentWithTabView : UIView {
     self.setNeedsLayout()
   }
   
+  func setTabImage(_ img : UIImage) {
+    tabImageView.image = img
+    tabImageView.bounds.size = tabSize
+    tabImageView.backgroundColor = UIColor.green
+  }
+  
   func setContentViewController(_ vc : UIViewController, parentVC: UIViewController) {
     contentViewController.willMove(toParentViewController: nil)
     contentViewController.view.removeFromSuperview()
@@ -56,11 +62,7 @@ class ContentWithTabView : UIView {
   }
   
   private func createViews() {
-    if let tabImg = UIImage(named: "eco_menu") {
-      tabImageView.image = tabImg
-      tabImageView.bounds.size = tabSize
-      tabImageView.backgroundColor = UIColor.green
-    }
+    setTabImage(UIImage())
     
     contentViewController.view.backgroundColor = UIColor.red
     contentViewController.view.alpha = 0.8

@@ -80,6 +80,12 @@ class ContainerViewController: UIViewController {
     
     sidePanelView.setContentViewController(vc, parentVC: self)
   }
+  
+  func setTabImage(_ img : UIImage?) {
+    if let img = img {
+      sidePanelView.setTabImage(img)
+    }
+  }
 }
 
 // MARK: ContainerViewController delegate
@@ -149,9 +155,10 @@ extension ContainerViewController: UIGestureRecognizerDelegate {
       break
       
     case .ended:
-      let sidePanelMaxX = sidePanelView.frame.maxX
-      let centerW = view.bounds.size.width
-      let shouldExpand = (sidePanelMaxX > 0.15 * centerW)
+      let sidePanelEnd = sidePanelView.frame.origin.x + sidePanelView.frame.width
+      let tabCenter = sidePanelEnd - sidePanelView.tabWidth
+      let screenW = UIScreen.main.bounds.size.width
+      let shouldExpand = (tabCenter > 0.15 * screenW)
 
       animateSidePanel(shouldExpand: shouldExpand)
       
