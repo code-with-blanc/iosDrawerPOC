@@ -51,6 +51,7 @@ class ContainerViewController: UIViewController {
     
     sidePanelView = ContentWithTabView()
     sidePanelView.tabWidth = 30
+    sidePanelView.setContentSize(UIScreen.main.bounds.size)
     view.addSubview(sidePanelView)
     
     moveSidePanelOutsideScreen()

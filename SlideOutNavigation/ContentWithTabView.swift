@@ -18,7 +18,8 @@ class ContentWithTabView : UIView {
     get { return tabSize.width }
     set {
       tabSize.width = newValue
-      self.layoutIfNeeded()
+      recalculateFrameSize()
+      self.setNeedsLayout()
     }
   }
   
@@ -34,7 +35,8 @@ class ContentWithTabView : UIView {
   
   func setContentSize(_ newSize : CGSize) {
     contentSize = newSize
-    self.layoutIfNeeded()
+    recalculateFrameSize()
+    self.setNeedsLayout()
   }
   
   private func createViews() {
@@ -45,7 +47,7 @@ class ContentWithTabView : UIView {
     }
     
     contentViewController.view.backgroundColor = UIColor.red
-    contentViewController.view.alpha = 0.6
+    contentViewController.view.alpha = 0.8
     
     self.backgroundColor = UIColor.blue
     
@@ -56,10 +58,7 @@ class ContentWithTabView : UIView {
   }
   
   override func layoutSubviews() {
-    self.frame = CGRect(x: self.frame.origin.x,
-                        y: 100,
-                        width: contentSize.width + tabSize.width,
-                        height: contentSize.height )
+    recalculateFrameSize()
     
     tabImageView.frame = CGRect(x: self.frame.width - tabSize.width,
                                 y: contentSize.height/2 - tabSize.height/2,
@@ -70,4 +69,10 @@ class ContentWithTabView : UIView {
     contentViewController.view.frame.origin = CGPoint(x: 0, y: 0)
   }
   
+  private func recalculateFrameSize() {
+    self.frame = CGRect(x: self.frame.origin.x,
+                        y: self.frame.origin.y,
+                        width: contentSize.width + tabSize.width,
+                        height: contentSize.height )
+  }
 }
